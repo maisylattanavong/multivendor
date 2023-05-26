@@ -22,30 +22,22 @@ class SliderBar extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const Text(
-                  ' << ',
-                  style: TextStyle(
-                      color: Colors.brown,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 10),
-                ),
+                maincategName == 'beauty'
+                    ? const Text('')
+                    : const Text(
+                        ' << ',
+                        style: style,
+                      ),
                 Text(
                   maincategName.toUpperCase(),
-                  style: const TextStyle(
-                      color: Colors.brown,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 10),
+                  style: style,
                 ),
-                const Text(
-                  ' >> ',
-                  style: TextStyle(
-                      color: Colors.brown,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 10),
-                ),
+                maincategName == 'men'
+                    ? const Text('')
+                    : const Text(
+                        ' >> ',
+                        style: style,
+                      ),
               ],
             ),
           ),
@@ -54,6 +46,12 @@ class SliderBar extends StatelessWidget {
     );
   }
 }
+
+const style = TextStyle(
+    color: Colors.brown,
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 10);
 
 class SubcategModel extends StatelessWidget {
   final String mainCategName;
@@ -86,7 +84,10 @@ class SubcategModel extends StatelessWidget {
             width: 70,
             child: Image(image: AssetImage(assetName)),
           ),
-          Text(subcategLabel)
+          Text(
+            subcategLabel,
+            style: TextStyle(fontSize: 11),
+          )
         ],
       ),
     );

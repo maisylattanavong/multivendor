@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:test_project/categories/accessories_categ.dart';
+import 'package:test_project/categories/bags_categ.dart';
+import 'package:test_project/categories/beauty_categ.dart';
+import 'package:test_project/categories/electronics_categ.dart';
+import 'package:test_project/categories/home_garden_categ.dart';
+import 'package:test_project/categories/kids_categ.dart';
 import 'package:test_project/categories/men_categ.dart';
+import 'package:test_project/categories/shoes_categ.dart';
 import 'package:test_project/categories/women_categ.dart';
 import 'package:test_project/widgets/fake_search.dart';
 
@@ -112,13 +119,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
         children: const [
           MenCategory(),
           WomenCategory(),
-          Center(child: Text('shoes category')),
-          Center(child: Text('bags category')),
-          Center(child: Text('electronics category')),
-          Center(child: Text('accessories category')),
-          Center(child: Text('home and garden category')),
-          Center(child: Text('kids category')),
-          Center(child: Text('beauty category')),
+          ShoesCategory(),
+          BagsCategory(),
+          ElectronicsCategory(),
+          AccessoriesCategory(),
+          HomeGardenCategory(),
+          KidsCategory(),
+          BeautyCategory(),
         ],
       ),
     );

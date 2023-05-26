@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:test_project/utilities/categ_list.dart';
 import '../widgets/categ_widgets.dart';
 
-class MenCategory extends StatelessWidget {
-  const MenCategory({super.key});
+class ShoesCategory extends StatelessWidget {
+  const ShoesCategory({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class MenCategory extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const CategHeaderLabel(
-                  headerLabel: 'Men',
+                  headerLabel: 'Shoes',
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.68,
@@ -28,16 +28,16 @@ class MenCategory extends StatelessWidget {
                     mainAxisSpacing: 70,
                     crossAxisSpacing: 15,
                     crossAxisCount: 3,
-                    children: List.generate(men.length, (index) {
+                    children: List.generate(shoes.length, (index) {
                       return SubcategModel(
-                        mainCategName: 'men',
-                        subCategName: men[index],
-                        assetName: 'images/men/men$index.jpg',
-                        subcategLabel: men[index],
+                        mainCategName: 'Shoes',
+                        subCategName: shoes[index],
+                        assetName: 'images/shoes/shoes$index.jpg',
+                        subcategLabel: shoes[index],
                       );
                     }),
                   ),
-                ),
+                )
               ],
             ),
           ),
@@ -46,7 +46,7 @@ class MenCategory extends StatelessWidget {
             bottom: 0,
             right: 0,
             child: SliderBar(
-              maincategName: 'men',
+              maincategName: 'shoes',
             ))
       ]),
     );

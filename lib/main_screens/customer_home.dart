@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_project/main_screens/cart.dart';
 import 'package:test_project/main_screens/category.dart';
 import 'package:test_project/main_screens/home.dart';
 import 'package:test_project/main_screens/stores.dart';
@@ -11,12 +12,12 @@ class CustomerHomeScreen extends StatefulWidget {
 }
 
 class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
   final List<Widget> _tabs = const [
     HomeScreen(),
     CategoryScreen(),
     StoreScreen(),
-    Center(child: Text('cart screen')),
+    CartScreen(),
     Center(child: Text('profile screen')),
   ];
   @override

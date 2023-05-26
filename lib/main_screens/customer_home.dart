@@ -13,7 +13,7 @@ class CustomerHomeScreen extends StatefulWidget {
 }
 
 class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 4;
   final List<Widget> _tabs = const [
     HomeScreen(),
     CategoryScreen(),

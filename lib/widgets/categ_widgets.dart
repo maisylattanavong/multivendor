@@ -63,7 +63,8 @@ class SubcategModel extends StatelessWidget {
       required this.mainCategName,
       required this.subCategName,
       required this.assetName,
-      required this.subcategLabel});
+      required this.subcategLabel})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +87,7 @@ class SubcategModel extends StatelessWidget {
           ),
           Text(
             subcategLabel,
-            style: TextStyle(fontSize: 11),
+            style: const TextStyle(fontSize: 11),
           )
         ],
       ),

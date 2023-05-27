@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:test_project/main_screens/cart.dart';
 import 'package:test_project/main_screens/category.dart';
+import 'package:test_project/main_screens/dashboard.dart';
 import 'package:test_project/main_screens/home.dart';
-import 'package:test_project/main_screens/profile.dart';
 import 'package:test_project/main_screens/stores.dart';
 
 class SupplierHomeScreen extends StatefulWidget {
@@ -18,9 +17,12 @@ class _SupplierHomeScreenState extends State<SupplierHomeScreen> {
     HomeScreen(),
     CategoryScreen(),
     StoreScreen(),
-    CartScreen(),
-    ProfileScreen(),
+    DashboardScreen(),
+    Center(
+      child: Text('Uplaod'),
+    )
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

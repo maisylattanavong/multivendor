@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:test_project/main_screens/supplier_home.dart';
+import 'package:test_project/main_screens/welcome_screen.dart';
 
 import 'main_screens/customer_home.dart';
 
@@ -13,7 +15,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CustomerHomeScreen(),
+      // home: CustomerHomeScreen(),
+      // home: SupplierHomeScreen(),
+      home: WelcomeScreen(),
     );
+
   }
 }

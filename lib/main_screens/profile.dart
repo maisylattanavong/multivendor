@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:test_project/customer_screens/customer_orders.dart';
+import 'package:test_project/customer_screens/wishlist.dart';
+import 'package:test_project/main_screens/cart.dart';
+import 'package:test_project/widgets/Appbar.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -97,7 +101,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const CartScreen(
+                                              back: AppBarBackButton(),
+                                            )));
+                              },
                             ),
                           ),
                           Container(
@@ -114,7 +125,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const CustomerOrders()));
+                              },
                             ),
                           ),
                           Container(
@@ -135,7 +152,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const WishlistScreen()));
+                              },
                             ),
                           )
                         ]),
@@ -206,7 +229,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 RepeatedListTile(
                                   title: 'Log Out',
                                   icon: Icons.logout,
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.pushReplacementNamed(
+                                        context, '/welcome_screen');
+                                  },
                                 ),
                               ],
                             ),

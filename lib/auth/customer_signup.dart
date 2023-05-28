@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_project/widgets/auth_widgets.dart';
 
 class CustomerRegister extends StatefulWidget {
   const CustomerRegister({Key? key}) : super(key: key);
@@ -8,6 +9,8 @@ class CustomerRegister extends StatefulWidget {
 }
 
 class _CustomerRegisterState extends State<CustomerRegister> {
+  bool passwordVisible = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,30 +22,13 @@ class _CustomerRegisterState extends State<CustomerRegister> {
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
-                // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Sign Up',
-                          style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-                        ),
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.home_work,
-                              size: 40,
-                            ))
-                      ],
-                    ),
-                  ),
+                  const AuthHeaderLabel(headerLabel: 'Sign Up'),
                   Row(
                     children: [
                       const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                         child: CircleAvatar(
                           radius: 60,
                           backgroundColor: Colors.purpleAccent,
@@ -92,17 +78,9 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: TextFormField(
-                      decoration: InputDecoration(
+                      decoration: textFormDecoration.copyWith(
                         labelText: 'Full Name',
                         hintText: 'Enter your full name',
-                        border: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(color: Colors.purple, width: 1),
-                            borderRadius: BorderRadius.circular(25)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                color: Colors.deepOrangeAccent, width: 2),
-                            borderRadius: BorderRadius.circular(25)),
                       ),
                     ),
                   ),
@@ -110,72 +88,41 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: TextFormField(
                       keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        labelText: 'Email Address',
-                        hintText: 'Enter your email',
-                        border: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(color: Colors.purple, width: 1),
-                            borderRadius: BorderRadius.circular(25)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                color: Colors.deepOrangeAccent, width: 2),
-                            borderRadius: BorderRadius.circular(25)),
-                      ),
+                      decoration: textFormDecoration.copyWith(
+                          labelText: 'Email Address',
+                          hintText: 'Enter your email'),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: TextFormField(
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        hintText: 'Enter your password',
-                        border: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(color: Colors.purple, width: 1),
-                            borderRadius: BorderRadius.circular(25)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                color: Colors.deepOrangeAccent, width: 2),
-                            borderRadius: BorderRadius.circular(25)),
-                      ),
+                      obscureText: passwordVisible,
+                      decoration: textFormDecoration.copyWith(
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                passwordVisible = !passwordVisible;
+                              });
+                            },
+                            icon: Icon(
+                              passwordVisible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: Colors.purple,
+                            ),
+                          ),
+                          labelText: 'Password',
+                          hintText: 'Enter your password'),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      const Text(
-                        'already have account? ',
-                        style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
-                      ),
-                      TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            'Log In',
-                            style: TextStyle(
-                                color: Colors.purple,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20),
-                          ))
-                    ],
+                  HaveAccont(
+                    haveAccount: 'Already have account?',
+                    actionLabel: 'Log In',
+                    onPressed: () {},
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 30),
-                    child: Material(
-                      color: Colors.purple,
-                      borderRadius: BorderRadius.circular(25),
-                      child: MaterialButton(
-                        minWidth: double.infinity,
-                        onPressed: () {},
-                        child:const Text(
-                          'Sign Up',
-                          style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        ),
-                      ),
-                    ),
+                  AuthMainButton(
+                    mainButtonLabel: 'Sign Up',
+                    onPressed: () {},
                   )
                 ],
               ),

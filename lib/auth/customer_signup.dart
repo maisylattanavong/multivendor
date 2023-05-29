@@ -280,7 +280,9 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                         },
                       ),
                       processing == true
-                          ? const CircularProgressIndicator()
+                          ? const CircularProgressIndicator(
+                              color: Colors.purple,
+                            )
                           : AuthMainButton(
                               mainButtonLabel: 'Sign Up',
                               onPressed: () {

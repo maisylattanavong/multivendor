@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:test_project/customer_screens/customer_orders.dart';
 import 'package:test_project/customer_screens/wishlist.dart';
 import 'package:test_project/main_screens/cart.dart';
 import 'package:test_project/widgets/Appbar.dart';
+import 'package:test_project/widgets/alert_dialog.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -229,9 +232,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 RepeatedListTile(
                                   title: 'Log Out',
                                   icon: Icons.logout,
-                                  onPressed: () {
-                                    Navigator.pushReplacementNamed(
-                                        context, '/welcome_screen');
+                                  onPressed: () async {
+                                    MyAlertDialog.showMyDialog(
+                                        context: context,
+                                        title: 'Log Out',
+                                        content: 'Are you sure to log out?',
+                                        tabNo: () {
+                                          Navigator.pop(context);
+                                        },
+                                        tabYes: () async {
+                                          await FirebaseAuth.instance.signOut();
+                                          Navigator.pop(context);
+                                          Navigator.pushReplacementNamed(
+                                              context, '/welcome_screen');
+                                        });
                                   },
                                 ),
                               ],

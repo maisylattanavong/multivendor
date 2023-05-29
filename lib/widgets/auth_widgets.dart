@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class AuthMainButton extends StatelessWidget {
@@ -36,9 +35,9 @@ class HaveAccont extends StatelessWidget {
 
   const HaveAccont(
       {super.key,
-        required this.haveAccount,
-        required this.actionLabel,
-        required this.onPressed});
+      required this.haveAccount,
+      required this.actionLabel,
+      required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -101,3 +100,11 @@ var textFormDecoration = InputDecoration(
       borderSide: const BorderSide(color: Colors.deepOrangeAccent, width: 2),
       borderRadius: BorderRadius.circular(25)),
 );
+
+extension EmailValidator on String {
+  bool isValidEmail() {
+    return RegExp(
+            r'^([a-zA-Z0-9]+)([\-\_\.]*)([a-zA-Z0-9]*)(([@])[a-zA-Z0-9]{2,})([\.][a-zA-Z]{2,3})$')
+        .hasMatch(this);
+  }
+}

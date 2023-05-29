@@ -82,7 +82,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 CircleAvatar(
                                   radius: 50,
                                   backgroundImage:
-                                      NetworkImage(data['profileImage']),
+                                      NetworkImage(data['profileimage']),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 25),

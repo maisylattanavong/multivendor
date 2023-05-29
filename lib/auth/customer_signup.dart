@@ -1,10 +1,12 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:test_project/widgets/auth_widgets.dart';
 import 'package:test_project/widgets/snackbar.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class CustomerRegister extends StatefulWidget {
   const CustomerRegister({Key? key}) : super(key: key);
@@ -17,6 +19,9 @@ class _CustomerRegisterState extends State<CustomerRegister> {
   late String name;
   late String email;
   late String password;
+  late String profileImage;
+  late String _uid;
+  bool processing = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldMessengerState> _scaffoldkey =
       GlobalKey<ScaffoldMessengerState>();
@@ -24,6 +29,9 @@ class _CustomerRegisterState extends State<CustomerRegister> {
   final ImagePicker _picker = ImagePicker();
   XFile? _imageFile;
   dynamic _pickedImageError;
+
+  CollectionReference customers =
+      FirebaseFirestore.instance.collection('customers');
 
   void _pickImageFromCamera() async {
     try {
@@ -62,29 +70,61 @@ class _CustomerRegisterState extends State<CustomerRegister> {
   }
 
   void signUp() async {
+    setState(() {
+      processing = true;
+    });
     if (_formKey.currentState!.validate()) {
       if (_imageFile != null) {
         try {
           await FirebaseAuth.instance
               .createUserWithEmailAndPassword(email: email, password: password);
+
+          firebase_storage.Reference ref = firebase_storage
+              .FirebaseStorage.instance
+              .ref('cust-images/$email.jpg');
+          await ref.putFile(File(_imageFile!.path));
+          _uid = FirebaseAuth.instance.currentUser!.uid;
+
+          profileImage = await ref.getDownloadURL();
+          await customers.doc(_uid).set({
+            'name': name,
+            'email': email,
+            'profileImage': profileImage,
+            'phone': '',
+            'address': '',
+            'cid': _uid,
+          });
           _formKey.currentState!.reset();
           setState(() {
             _imageFile = null;
           });
+
           Navigator.pushReplacementNamed(context, '/customer_home');
         } on FirebaseAuthException catch (e) {
           if (e.code == 'weak-password') {
+            setState(() {
+              processing = false;
+            });
             MyMessageHandler.showSnackBar(
                 _scaffoldkey, 'The password provided is too weak');
           } else if (e.code == 'email-already-in-use') {
+            setState(() {
+              processing = false;
+            });
             MyMessageHandler.showSnackBar(
                 _scaffoldkey, 'The account already exists for that email');
           }
         }
       } else {
+        setState(() {
+          processing = false;
+        });
         MyMessageHandler.showSnackBar(_scaffoldkey, 'Please pick image first!');
       }
     } else {
+      setState(() {
+        processing = false;
+      });
       MyMessageHandler.showSnackBar(_scaffoldkey, 'Please fill all field');
     }
   }
@@ -236,12 +276,14 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                         actionLabel: 'Log In',
                         onPressed: () {},
                       ),
-                      AuthMainButton(
-                        mainButtonLabel: 'Sign Up',
-                        onPressed: () {
-                          signUp();
-                        },
-                      )
+                      processing == true
+                          ? const CircularProgressIndicator()
+                          : AuthMainButton(
+                              mainButtonLabel: 'Sign Up',
+                              onPressed: () {
+                                signUp();
+                              },
+                            )
                     ],
                   ),
                 ),

@@ -42,6 +42,8 @@ dependencies:
   firebase_storage: ^11.2.1
   firebase_core: ^2.13.0
   uuid: ^3.0.7
+  staggered_grid_view_flutter: ^0.0.4
+  flutter_swiper_null_safety: ^1.0.2
 
 dev_dependencies:
   flutter_test:
